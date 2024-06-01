@@ -1,4 +1,4 @@
-name: API Build and Deploy
+name: API Buil and Deploy
 
 on:
   push:
@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v2
         with:
           python-version: '3.12'
 
@@ -30,6 +30,12 @@ jobs:
         run: |
           uvicorn main:app --host 0.0.0.0 --port 8080 --reload
 
+      - name: Login to Streamlit Cloud
+        run: |
+          streamlit login
+        env:
+          STREAMLIT_TOKEN: ${{ secrets.STREAMLIT_TOKEN }}
+
       - name: Deploy to Streamlit Cloud
         run: |
-          streamlit deploy streamlit_app/streamlit_classifier.py
+          streamlit deploy streamlit_classifier.py
