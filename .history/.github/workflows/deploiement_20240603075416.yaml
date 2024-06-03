@@ -27,14 +27,14 @@ jobs:
           python -m pytest tests/
 
       - name: Build application
-        run: |
-          echo "Running build steps"
-          # Compile all Python files
-          python -m compileall .
-          # Verify the presence of model files
-          if [ ! -f "model.classifier" ]; then echo "model.classifier not found!"; exit 1; fi
-          if [ ! -f "mlb_encoder" ]; then echo "mlb_encoder not found!"; exit 1; fi
-          if [ ! -f "model_vectorizer" ]; then echo "model_vectorizer not found!"; exit 1; fi
+      run: |
+        echo "Running build steps"
+        # Compile all Python files
+        python -m compileall .
+        # Verify the presence of model files
+        if [ ! -f "model.classifier" ]; then echo "model.classifier not found!"; exit 1; fi
+        if [ ! -f "mlb_encoder" ]; then echo "mlb_encoder not found!"; exit 1; fi
+        if [ ! -f "model_vectorizer" ]; then echo "model_vectorizer not found!"; exit 1; fi
 
       - name: Run FastAPI server
         run: |
